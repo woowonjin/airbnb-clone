@@ -3,8 +3,16 @@
     Wbnb
   </a>
   <ul>
+    
+    {% if user.is_authenticated %}
     <li>
-      <a href="#">Login </a>
+      <a href="{% url "users:logout" %}">Logout </a>
     </li>
+    {%else%}
+    <li>
+      <a href="{% url "users:login" %}">Login </a>
+    </li>
+    {% endif %}
+      
   </ul>
 </header>
