@@ -10,8 +10,7 @@
 
 
 {% block content %}
-    <form method="POST" action="{% url "users:signup"%}">
-        {% csrf_token %}
+    <form method="POST" action="{% url "users:signup"%}">{% csrf_token %}
     {{form.as_p}}
     <button>Sign up</button>
     </form>

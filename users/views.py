@@ -33,7 +33,7 @@ class SignUpView(FormView):
     initial = {
         "first_name": "Wonjin",
         "last_name": "Woo",
-        "email": "dndnjswls61@naver.com",
+        "email": "dndnjswls918@naver.com",
     }
 
     def form_valid(self, form):
@@ -43,4 +43,5 @@ class SignUpView(FormView):
         user = authenticate(self.request, username=email, password=password)
         if user is not None:
             login(self.request, user)
+        user.verify_email()
         return super().form_valid(form)
