@@ -113,3 +113,8 @@ class Room(core_models.TimeStampedModel):
             return total_avg
         else:
             return
+
+    def first_photo(self):
+        photo = self.photos.all()[0]
+        return photo.file.url
+
