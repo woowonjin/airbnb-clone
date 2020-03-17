@@ -1,0 +1,17 @@
+<form method="POST" class="w-full" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="input">
+        {% if form.none_field_errors %}
+            {% for error in form.none_field_errors %}
+                <span class="text-red-700 font-medium text-sm">{{error}}</span>
+            {% endfor %}
+        {% endif %}
+    </div>    
+
+    {% for field in form %}
+        {% include "partials/mixins/room/room_input.html" with field=field %}
+    {% endfor %}
+    
+<button class="btn bg-airbnb text-white">{{cta}}</button>
+</form>
