@@ -27,3 +27,12 @@ class LoggedOutOnlyView(UserPassesTestMixin):
 
 class LoggedInOnlyView(LoginRequiredMixin):
     login_url = reverse_lazy("users:login")
+
+
+class HostOnlyView(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.session.get("is_hosting", False)
+
+    def handle_no_permission(self):
+        messages.error(self.request, "Hosting Mode only Page")
+        return redirect(reverse("core:home"))
