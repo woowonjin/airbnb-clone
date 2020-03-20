@@ -13,6 +13,9 @@ module.exports = {
         kakao: "#F9E000",
         kakao_text: "#3A1D1E",
         airbnb: "#FF5A5F"
+      },
+      width: {
+        "1/7": "14.2857143%"
       }
     }
   },
