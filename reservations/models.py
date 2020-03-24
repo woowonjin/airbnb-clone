@@ -21,12 +21,12 @@ class Reservation(core_models.TimeStampedModel):
     """Reservation Definition"""
 
     STATUS_PENDING = "pending"
-    STATUS_CONFIRM = "confirmed"
+    STATUS_CONFIRMED = "confirmed"
     STATUS_CANCELED = "canceled"
 
     STATUS_CHOICES = (
         (STATUS_PENDING, "Pending"),
-        (STATUS_CONFIRM, "Confirmed"),
+        (STATUS_CONFIRMED, "Confirmed"),
         (STATUS_CANCELED, "Canceled"),
     )
     objects = managers.CustomReservationManager()
@@ -66,17 +66,13 @@ class Reservation(core_models.TimeStampedModel):
             start = self.check_in
             end = self.check_out
             difference = end - start
-            print("!!!!!!!!!")
-            print("!!!!!!!!!")
             existing_booked_day = BookedDay.objects.filter(
                 reservation__room=self.room, day__range=(start, end)
             ).exists()
-            print("????????????")
             if not existing_booked_day:
                 super().save(*args, **kwargs)
                 for i in range(difference.days + 1):
                     day = start + datetime.timedelta(days=i)
                     BookedDay.objects.create(day=day, reservation=self)
-                print(">>>>>>>>>>>>>>>????!!!")
                 return
             return super().save(*args, **kwargs)
